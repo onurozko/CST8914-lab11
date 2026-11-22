@@ -14,8 +14,11 @@ const accordionBtns = document.querySelectorAll(".accordion");
 accordionBtns.forEach((accordion) => {
   accordion.onclick = function () {
     this.classList.toggle("is-open");
+    
+    this.setAttribute("aria-expanded", this.classList.contains("is-open"));
 
-    let content = this.nextElementSibling;
+    let content = document.getElementById(this.getAttribute("aria-controls"));
+    content.hidden = !this.classList.contains("is-open");
     console.log(content);
 
     if (content.style.maxHeight) {
